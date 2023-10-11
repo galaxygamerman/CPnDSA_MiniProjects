@@ -1,9 +1,13 @@
 #include<iostream>
+using std::cout;
+using std::cin;
+using std::endl;
 
+//This structure exists only because I felt fancy, and didn't want to use "_" in variable names
 struct digitData
 {
     int desiredDigits,printedDigits=0;
-}alphas,nums,symbo;  //This structure exists only because I felt fancy, and didn't want to use "_" in variable names
+}alphas,nums,symbo;
 
 int totalDigits;
 char alphaKeySet[]="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
@@ -14,39 +18,49 @@ char alphaKeySet[]="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
 int main()
 {
     srand(time(NULL));
-    std::cout<<"Input the no. of letters in your password: "; std::cin>> alphas.desiredDigits;
-    std::cout<<"Input the no. of numbers in your password: "; std::cin>> nums.desiredDigits;
-    std::cout<<"Input the no. of symbols in your password: "; std::cin>> symbo.desiredDigits;
+    cout<<"Input the no. of letters in your password: "; cin>> alphas.desiredDigits;
+    cout<<"Input the no. of numbers in your password: "; cin>> nums.desiredDigits;
+    cout<<"Input the no. of symbols in your password: "; cin>> symbo.desiredDigits;
+
     totalDigits=alphas.desiredDigits+nums.desiredDigits+symbo.desiredDigits; //To calculate how long the desired password is
 
-    std::cout<<"Your password of "<<totalDigits<<" digits, sire!: \n";
+
+    cout<<"Your password of "<<totalDigits<<" digits, sire!: \n";
 
     int i=0;
-    labelWhichType:   //A label to allow me to loop the program according to how I intended. Trust me, for and while didn't work
+    labelWhichType:  //A label to allow me to loop the program according to how I intended. Trust me, for and while didn't work well
         switch (rand()%3 +1)
         {
+            //Aphabets
         case 1:
             if(alphas.printedDigits>=alphas.desiredDigits) goto labelWhichType;
             password[i]=alphaKeySet[rand()%53];
             alphas.printedDigits++;
-            std::cout<<password[i];
+            cout<<password[i];
             break;
+
+            //Numbers
         case 2:
             if(nums.printedDigits>=nums.desiredDigits) goto labelWhichType;
             password[i]=numKeySet[rand()%11];
             nums.printedDigits++;
-            std::cout<<password[i];
+            cout<<password[i];
             break;
+
+            //Symbols
         case 3:
             if(symbo.printedDigits>=symbo.desiredDigits) goto labelWhichType;
             password[i]=symboKeySet[rand()%15];
             symbo.printedDigits++;
-            std::cout<<password[i];
+            cout<<password[i];
             break;
-        default: std::cout<<"[Debug for Dev]Wrong rand value in loop"<<i<<std::endl; //This statement came in most handy when for and while loops were giving me trouble
+
+            //Incase anything went wrong
+        default: cout<<"[Debug for Dev]Wrong rand value in loop"<<i<<endl;
         }
         i=alphas.printedDigits+nums.printedDigits+symbo.printedDigits;
-    if(i<totalDigits) goto labelWhichType;
+
+    if(i<totalDigits) goto labelWhichType; //To loop back
     
     return 0;
 }
