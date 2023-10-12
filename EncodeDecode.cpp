@@ -1,11 +1,10 @@
 #include <iostream>
 using namespace std;
 
-void encode(char *, int);
-void decode(char *, int);
+void encode(char*, int);
+void decode(char*, int);
 
-int main()
-{
+int main() {
     char whichFunc[6], message[20];
     int shift;
 
@@ -16,18 +15,13 @@ int main()
     cout << "Input the shift: ";
     cin >> shift;
 
-    if (*whichFunc == 'e' || *whichFunc == 'E')
-    {
+    if (*whichFunc == 'e' || *whichFunc == 'E') {
         cout << "The Encoded message: ";
         encode(message, shift);
-    }
-    else if (*whichFunc == 'd' || *whichFunc == 'D')
-    {
+    } else if (*whichFunc == 'd' || *whichFunc == 'D') {
         cout << "The Decoded message: ";
         decode(message, shift);
-    }
-    else
-    {
+    } else {
         cout << "Wrong Input!";
         return 0;
     }
@@ -35,12 +29,9 @@ int main()
     return 0;
 }
 
-void encode(char *m, int s)
-{
-    while (*m != '\0')
-    {
-        for (int j = 0; j < s; j++)
-        {
+void encode(char* m, int s) {
+    while (*m != '\0') {
+        for (int j = 0; j < s; j++) {
             (*m)++;
             if ((*m) > 'z')
                 (*m) = 'a';
@@ -50,12 +41,9 @@ void encode(char *m, int s)
         m++;
     }
 }
-void decode(char *m, int s)
-{
-    while (*m != '\0')
-    {
-        for (int j = 0; j < s; j++)
-        {
+void decode(char* m, int s) {
+    while (*m != '\0') {
+        for (int j = 0; j < s; j++) {
             (*m)--;
             if ((*m) < 'A')
                 (*m) = 'Z';

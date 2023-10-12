@@ -11,12 +11,11 @@ struct digitData
 
 int totalDigits;
 char alphaKeySet[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ",
-     numKeySet[] = "0123456789",
-     symboKeySet[] = "!@#$%^&*()+-*/",
-     password[32];
+numKeySet[] = "0123456789",
+symboKeySet[] = "!@#$%^&*()+-*/",
+password[32];
 
-int main()
-{
+int main() {
     srand(time(NULL));
     cout << "Input the no. of letters in your password: ";
     cin >> alphas.desiredDigits;
@@ -31,8 +30,7 @@ int main()
 
     int i = 0;
 labelWhichType: // A label to allow me to loop the program according to how I intended. Trust me, for and while didn't work well
-    switch (rand() % 3 + 1)
-    {
+    switch (rand() % 3 + 1) {
         // Aphabets
     case 1:
         if (alphas.printedDigits >= alphas.desiredDigits)
