@@ -1,8 +1,9 @@
-#include <iostream.h>
+#include <iostream>
+using namespace std;
 void encode(char*,int);
 void decode(char*,int);
 
-void main()
+int main()
 {
     char whichFunc[6],message[20];
     int shift;
@@ -11,21 +12,22 @@ void main()
     cout<<"Input the Message: "; cin >> message;
     cout<<"Input the shift: "; cin >> shift;
     
-    if(*whichFunc=='e')
+    if(*whichFunc=='e' || *whichFunc=='E')
     {
         cout<<"The Encoded message: ";
         encode(message,shift);
     }
-    else if(*whichFunc=='d')
+    else if(*whichFunc=='d' || *whichFunc=='D')
     {
         cout<<"The Decoded message: ";
         decode(message,shift);
     }
     else
     {
-        cout<<"Wrong Input!"; return;
+        cout<<"Wrong Input!"; return 0;
     }
     cout<<message;
+    return 0;
 }
 
 void encode(char *m,int s)
