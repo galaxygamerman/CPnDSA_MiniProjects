@@ -5,6 +5,8 @@
 // #include <sstream>
 using namespace std;
 
+#define MORSE_SYMBOL_FOR_SPACE "+"
+
 class conversions
 {
 private:
@@ -31,10 +33,10 @@ public:
     void print_title()
     {
         std::cout << " .      ____  ....  ____  .....   ___   ...  ____  ..... \n"
-             << "/ \\__/|/  - \\/  __\\/ ___\\/  __/  /  _\\ /   \\/ __ \\/  __/ \n"
-             << "| |\\/||| / \\||  \\/||    \\|  \\   |  /  | / \\|| | \\||  \\ \n"
-             << "| |  ||| \\_/||    /\\___ ||  /_  |  \\__| \\_/|| |_/||  /_ \n"
-             << "\\_/  \\|\\____/\\_/\\_\\\\____/\\____\\ \\____/\\____/\\____/\\____\\ \n";
+                  << "/ \\__/|/  - \\/  __\\/ ___\\/  __/  /  _\\ /   \\/ __ \\/  __/ \n"
+                  << "| |\\/||| / \\||  \\/||    \\|  \\   |  /  | / \\|| | \\||  \\ \n"
+                  << "| |  ||| \\_/||    /\\___ ||  /_  |  \\__| \\_/|| |_/||  /_ \n"
+                  << "\\_/  \\|\\____/\\_/\\_\\\\____/\\____\\ \\____/\\____/\\____/\\____\\ \n";
     }
 };
 
@@ -66,7 +68,7 @@ conversions::conversions()
     TtoM['x'] = "-..-";
     TtoM['y'] = "-.--";
     TtoM['z'] = "--..";
-    TtoM[' '] = " ";
+    TtoM[' '] = MORSE_SYMBOL_FOR_SPACE;
     TtoM['0'] = "-----";
     TtoM['1'] = ".----";
     TtoM['2'] = "..---";
@@ -122,9 +124,9 @@ int main()
     do
     {
         std::cout << "MENU" << endl
-             << "Type 1 to convert Text to Morse Code" << endl
-             << "Type 2 to convert Morse Code to Text" << endl
-             << "Type 3 to exit" << endl;
+                  << "Type 1 to convert Text to Morse Code" << endl
+                  << "Type 2 to convert Morse Code to Text" << endl
+                  << "Type 3 to exit" << endl;
         std::cout << "Enter your choice: ";
         std::cin >> choice;
 
@@ -137,7 +139,7 @@ int main()
             conv.textToMorse(query);
             break;
         case 2:
-            std::cout << "Enter the Morse Code you want to convert: ";
+            std::cout << "Enter the Morse Code you want to convert (Use " << MORSE_SYMBOL_FOR_SPACE << " to separate words): ";
             cin.ignore(1, '\n'); // To get rid of the stray '\n' in buffer due to cin
             getline(cin, query);
             conv.morseToText(query);
@@ -150,7 +152,7 @@ int main()
             break;
         }
         std::cout << endl
-             << endl;
+                  << endl;
     } while (choice != 3);
 
     return 0;
