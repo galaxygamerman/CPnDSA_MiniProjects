@@ -18,30 +18,25 @@ public:
     ~conversions();
     void textToMorse(string query);
     void morseToText(string query);
-    void print_hash()
-    {
-        for (const auto &[key, value] : TtoM)
-        {
+    void print_hash() {
+        for (const auto& [key, value] : TtoM) {
             std::cout << key << " : " << value << '\n';
         }
         std::cout << "-------------------------------\n";
-        for (const auto &[key, value] : MtoT)
-        {
+        for (const auto& [key, value] : MtoT) {
             std::cout << key << " : " << value << '\n';
         }
     }
-    void print_title()
-    {
+    void print_title() {
         std::cout << " .      ____  ....  ____  .....   ___   ...  ____  ..... \n"
-                  << "/ \\__/|/  - \\/  __\\/ ___\\/  __/  /  _\\ /   \\/ __ \\/  __/ \n"
-                  << "| |\\/||| / \\||  \\/||    \\|  \\   |  /  | / \\|| | \\||  \\ \n"
-                  << "| |  ||| \\_/||    /\\___ ||  /_  |  \\__| \\_/|| |_/||  /_ \n"
-                  << "\\_/  \\|\\____/\\_/\\_\\\\____/\\____\\ \\____/\\____/\\____/\\____\\ \n";
+            << "/ \\__/|/  - \\/  __\\/ ___\\/  __/  /  _\\ /   \\/ __ \\/  __/ \n"
+            << "| |\\/||| / \\||  \\/||    \\|  \\   |  /  | / \\|| | \\||  \\ \n"
+            << "| |  ||| \\_/||    /\\___ ||  /_  |  \\__| \\_/|| |_/||  /_ \n"
+            << "\\_/  \\|\\____/\\_/\\_\\\\____/\\____\\ \\____/\\____/\\____/\\____\\ \n";
     }
 };
 
-conversions::conversions()
-{
+conversions::conversions() {
     TtoM['a'] = ".-";
     TtoM['b'] = "-...";
     TtoM['c'] = "-.-.";
@@ -80,58 +75,50 @@ conversions::conversions()
     TtoM['8'] = "---..";
     TtoM['9'] = "----.";
 
-    for (const auto &[key, value] : TtoM) // To automatically set the MtoT map
+    for (const auto& [key, value] : TtoM) // To automatically set the MtoT map
     {
         MtoT[value] = key;
     }
 }
 
-conversions::~conversions()
-{
+conversions::~conversions() {
     TtoM.clear();
     MtoT.clear();
 }
 
-void conversions::textToMorse(string query)
-{
+void conversions::textToMorse(string query) {
     std::cout << query << " in Morse Code is: ";
-    for (int i = 0; query[i] != '\0'; i++)
-    {
+    for (int i = 0; query[i] != '\0'; i++) {
         std::cout << TtoM[query[i]] << " ";
     }
 }
 
-void conversions::morseToText(string query)
-{
+void conversions::morseToText(string query) {
     std::cout << query << " in text is: ";
     string subquery;
     stringstream querystream(query);
 
-    while (getline(querystream, subquery, ' '))
-    {
+    while (getline(querystream, subquery, ' ')) {
         std::cout << MtoT[subquery];
         // std::cout<<' ';
     }
 }
 
-int main()
-{
+int main() {
     int choice;
     string query;
     conversions conv;
     conv.print_title();
     // conv.print_hash(); //Used during testing to check whether hashtable is initialised properly
-    do
-    {
+    do {
         std::cout << "MENU" << endl
-                  << "Type 1 to convert Text to Morse Code" << endl
-                  << "Type 2 to convert Morse Code to Text" << endl
-                  << "Type 3 to exit" << endl;
+            << "Type 1 to convert Text to Morse Code" << endl
+            << "Type 2 to convert Morse Code to Text" << endl
+            << "Type 3 to exit" << endl;
         std::cout << "Enter your choice: ";
         std::cin >> choice;
 
-        switch (choice)
-        {
+        switch (choice) {
         case 1:
             std::cout << "Enter the Text you want to convert: ";
             cin.ignore(1, '\n'); // To get rid of the stray '\n' in buffer due to cin
@@ -152,7 +139,7 @@ int main()
             break;
         }
         std::cout << endl
-                  << endl;
+            << endl;
     } while (choice != 3);
 
     return 0;
