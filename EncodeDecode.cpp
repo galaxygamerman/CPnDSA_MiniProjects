@@ -1,11 +1,11 @@
 #include <iostream>
 using namespace std;
 
-void encode(char*, int);
-void decode(char*, int);
+void encode(string&, int);
+void decode(string&, int);
 
 int main() {
-    char whichFunc[6], message[20];
+    string whichFunc, message;
     int shift;
 
     cout << "Type encode or decode to perform said function: ";
@@ -15,10 +15,10 @@ int main() {
     cout << "Input the shift: ";
     cin >> shift;
 
-    if (*whichFunc == 'e' || *whichFunc == 'E') {
+    if (whichFunc[0] == 'e' || whichFunc[0] == 'E') {
         cout << "The Encoded message: ";
         encode(message, shift);
-    } else if (*whichFunc == 'd' || *whichFunc == 'D') {
+    } else if (whichFunc[0] == 'd' || whichFunc[0] == 'D') {
         cout << "The Decoded message: ";
         decode(message, shift);
     } else {
@@ -29,27 +29,19 @@ int main() {
     return 0;
 }
 
-void encode(char* m, int s) {
-    while (*m != '\0') {
-        for (int j = 0; j < s; j++) {
-            (*m)++;
-            if ((*m) > 'z')
-                (*m) = 'a';
-            else if ((*m) > 'Z' && (*m) < 'a')
-                (*m) = 'A';
-        }
-        m++;
+void encode(string& m, int s) {
+    for (int i = 0; i < m.length(); i++) {
+        if ('a' <= m[i] && m[i] <= 'z')
+            m[i] = (m[i] - 'a' + s) % 26 + 'a';
+        else if ('A' <= m[i] && m[i] <= 'Z')
+            m[i] = (m[i] - 'A' + s) % 26 + 'A';
     }
 }
-void decode(char* m, int s) {
-    while (*m != '\0') {
-        for (int j = 0; j < s; j++) {
-            (*m)--;
-            if ((*m) < 'A')
-                (*m) = 'Z';
-            else if ((*m) > 'Z' && (*m) < 'a')
-                (*m) = 'z';
-        }
-        m++;
+void decode(string& m, int s) {
+    for (int i = 0; i < m.length(); i++) {
+        if ('a' <= m[i] && m[i] <= 'z')
+            m[i] = (m[i] - 'a' - s + 26) % 26 + 'a';
+        else if ('A' <= m[i] && m[i] <= 'Z')
+            m[i] = (m[i] - 'A' - s + 26) % 26 + 'A';
     }
 }
